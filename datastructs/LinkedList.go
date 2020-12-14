@@ -1,4 +1,4 @@
-package datastructs 
+package LinkedList 
 
 import (
     "fmt"
@@ -6,12 +6,12 @@ import (
 
 type LLNode struct {
     data int 
-    *next LLNode
+    next *LLNode
 }
 
 type LinkedList struct {
-    LLNode *head
-    LLNode *tail 
+    head *LLNode
+    tail *LLNode 
     length int 
 }
 
@@ -23,16 +23,16 @@ func Test() {
     fmt.Println("Hello from LinkedList")
 }
 
-//func Append(int i) {
-//    
-//}
+func Append(int i) {
+   
+}
 
-//func set(int index, int i) {
-//
-//}
+func set(int index, int i) {
 
-func IsEmpty() bool {
-    return int == nil 
+}
+
+func (llist *LinkedList) IsEmpty() bool {
+    return llist.length == 0 
 }
 
 
