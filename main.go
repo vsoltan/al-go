@@ -2,10 +2,9 @@ package main
 
 import (
     "fmt"
-    LList "github.com/vsoltan/al-go/datastructs"
+    // "github.com/vsoltan/al-go/datastructs/LinkedList"
 )
 
 func main() {
-    fmt.Println("Hello World")
-    LList.Test() 
+    fmt.Println("Welcome to my Go algorithms demo")
 }
