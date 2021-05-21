@@ -1,24 +1,23 @@
-package Queue 
+package queue
 
 import (
-	"testing" 
+	"testing"
 )
 
 func TestConstructor(t *testing.T) {
-	q := New() 
+	q := New()
 
-	if is_empty := q.Size() == 0; !is_empty {
+	if isEmpty := q.Size() == 0; !isEmpty {
 		t.Errorf("Constructed stack has non-zero size")
 	}
 }
 
 // func TestEnqueue(t *testing.T) {
-	
+
 // }
 
 // func TestDequeue(t *testing.T) {
-	
+
 // }
 
 // func Test
-

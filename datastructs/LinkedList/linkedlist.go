@@ -1,85 +1,115 @@
-package LinkedList 
+package linkedlist
 
 import (
-    "strings"
-    "strconv"
+	"fmt"
 )
 
-type LLNode struct {
-    data int 
-    next *LLNode
+type Node struct {
+	value interface{}
+	next  *Node
 }
 
-type LinkedList struct {
-    front *LLNode
-    back *LLNode 
-    length int 
+func (node *Node) Value() interface{} {
+	return node.value
 }
 
-func NewLinkedList() *LinkedList {
-    return &LinkedList{}
+func (node *Node) SetValue(value interface{}) {
+	node.value = value
 }
 
-func (list *LinkedList) IsEmpty() bool {
-    return list.length == 0 
+func (node *Node) Next() *Node {
+	return node.next
 }
 
-func (list *LinkedList) AppendFront(i int) {
-    to_append := &LLNode{i, nil}
-    if list.front == nil {
-        list.front = to_append
-        list.back = to_append 
-    } else {
-        to_append.next = list.front 
-        list.front = to_append
-    }
-    list.length++ 
+func (node *Node) SetNext(next *Node) {
+	node.next = next
 }
 
-func (list *LinkedList) AppendBack(i int) {
-    to_append := &LLNode{i, nil}
-    if list.back == nil {
-        list.front = to_append
-        list.back = to_append 
-    } else {
-        list.back.next = to_append  
-        list.back = to_append 
-    }
-    list.length++ 
+type List struct {
+	front *Node
+	back  *Node
+	len   int
 }
 
-func (list *LinkedList) RemoveFront() int {
-    if list.length == 0 {
-        // error 
-    }
-    removed_data := list.front.data 
-    list.front = list.front.next 
-    list.length-- 
-    return removed_data
+func New() *List {
+	return &List{}
 }
 
-func (list *LinkedList) RemoveBack() int {
-    if list.length == 0 {
-        // error 
-    }
-    removed_data := list.back.data 
-    it := list.front
-    for it.next != list.back {
-        it = it.next 
-    }
-    list.back = it 
-    list.back.next = nil 
-    list.length-- 
-    return removed_data
+func (list *List) Front() *Node {
+	return list.front
 }
 
-func (list *LinkedList) String() string {
-    it := list.front; 
-    var list_str strings.Builder 
-    for it != nil {
-        list_str.WriteString(strconv.Itoa(it.data))
-        list_str.WriteString(" ")
-        it = it.next 
-    }
-    return list_str.String()
+func (list *List) Back() *Node {
+	return list.back
+}
+
+func (list *List) Length() int {
+	return list.len
+}
+
+func (list *List) IsEmpty() bool {
+	return list.len == 0
+}
+
+func (list *List) AppendFront(i interface{}) {
+	toAppend := &Node{i, nil}
+	if list.front == nil {
+		list.front = toAppend
+		list.back = toAppend
+	} else {
+		toAppend.next = list.front
+		list.front = toAppend
+	}
+	list.len++
+}
+
+func (list *List) AppendBack(i interface{}) {
+	toAppend := &Node{i, nil}
+	if list.back == nil {
+		list.front = toAppend
+		list.back = toAppend
+	} else {
+		list.back.next = toAppend
+		list.back = toAppend
+	}
+	list.len++
+}
+
+func (list *List) RemoveFront() (value interface{}, ok bool) {
+	if list.len == 0 {
+		return
+	}
+	value = list.front.value
+	list.front = list.front.next
+	list.len--
+	ok = true
+	return
+}
+
+func (list *List) RemoveBack() (value interface{}, ok bool) {
+	if list.len == 0 {
+		return
+	}
+	value = list.back.value
+	it := list.front
+	for it.Next() != list.back {
+		it = it.Next()
+	}
+	list.back = it
+	list.back.next = nil
+	list.len--
+	ok = true
+	return
+}
+
+func (list *List) Print() {
+	it := list.front
+	for it != nil {
+		fmt.Println(it.value)
+		it = it.Next()
+	}
+}
+
+func (list *List) Reverse() *List {
+	return nil
 }
